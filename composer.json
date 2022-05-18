@@ -1,0 +1,31 @@
+{
+    "name": "langleyfoxall/laravel-authentication-log",
+    "description": "Logs authentication requests",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Warren-LF",
+            "email": "Warren@LangleyFoxall.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LangleyFoxall\\LaravelAuthenticationLog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LangleyFoxall\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.5"
+    }
+}
