@@ -10,6 +10,12 @@ class LaravelAuthenticationLogServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(EventServiceProvider::class);
+
+        if($this->app->runningInConsole()) {
+            $this->commands([
+                ShowLog::class
+            ]);
+        }
     }
 
     public function boot()
