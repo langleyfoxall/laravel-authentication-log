@@ -3,6 +3,7 @@
 namespace LangleyFoxall\LaravelAuthenticationLog;
 
 use Illuminate\Support\ServiceProvider;
+use LangleyFoxall\LaravelAuthenticationLog\Console\ShowLog;
 use LangleyFoxall\LaravelAuthenticationLog\Providers\EventServiceProvider;
 
 class LaravelAuthenticationLogServiceProvider extends ServiceProvider

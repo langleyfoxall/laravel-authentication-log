@@ -14,6 +14,12 @@ Once the package has been installed, run your migrations and ensure to use the t
 
 All successful logins are logged within the authentication_log_records table.
 
+## Commands
+
+> php artisan laravel-authentication-log:showlog
+
+This command will display the data stored in the Authentication Log Records table
+
 ## Notes
 
 Currently only supports Logging In
