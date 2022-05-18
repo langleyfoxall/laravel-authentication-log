@@ -8,7 +8,7 @@ class CreateAuthenticationLogRecordsTable extends Migration
 {
     public function up()
     {
-        Schema::create('authenticationLogRecords', function(Blueprint $table) {
+        Schema::create('authentication_log_records', function(Blueprint $table) {
             $table->id();
             $table->foreignId('authenticatable_id');
             $table->string('authenticatable_type');
@@ -18,6 +18,6 @@ class CreateAuthenticationLogRecordsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('authenticationLogRecords');
+        Schema::dropIfExists('authentication_log_records');
     }
 }
