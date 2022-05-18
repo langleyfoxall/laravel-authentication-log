@@ -121,6 +121,7 @@ class ComposerStaticInit3aa593676f5313d01ecdd90990b26f71
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
             'Laravel\\SerializableClosure\\' => 28,
+            'LangleyFoxall\\LaravelAuthenticationLog\\Tests\\' => 45,
             'LangleyFoxall\\LaravelAuthenticationLog\\' => 39,
         ),
         'I' => 
@@ -170,8 +171,8 @@ class ComposerStaticInit3aa593676f5313d01ecdd90990b26f71
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'ZBateson\\StreamDecorators\\' => 
         array (
@@ -339,8 +340,8 @@ class ComposerStaticInit3aa593676f5313d01ecdd90990b26f71
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\EventDispatcher\\' => 
         array (
@@ -389,6 +390,10 @@ class ComposerStaticInit3aa593676f5313d01ecdd90990b26f71
         'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
+        ),
+        'LangleyFoxall\\LaravelAuthenticationLog\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'LangleyFoxall\\LaravelAuthenticationLog\\' => 
         array (

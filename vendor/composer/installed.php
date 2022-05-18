@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '50effdc41271221f36cbd61ea41bfa856f4ca3c6',
+        'reference' => '80895602abfb73b64f9926f3b922a4400f094686',
         'name' => 'langleyfoxall/laravel-authentication-log',
         'dev' => true,
     ),
@@ -334,7 +334,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '50effdc41271221f36cbd61ea41bfa856f4ca3c6',
+            'reference' => '80895602abfb73b64f9926f3b922a4400f094686',
             'dev_requirement' => false,
         ),
         'laravel/framework' => array(
