@@ -2,14 +2,26 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog\Subscribers;
 
+use LangleyFoxall\LaravelAuthenticationLog\Models\AuthenticationLogRecord;
+
 class AuthenticationLogSubscriber
 {
     public function handleAuthenticatableLogin($event) {
-        dd("Do the login thing!");
+
+        AuthenticationLogRecord::create([
+            'authenticatable_id' => $event->user->id,
+            'authenticatable_type' => get_class($event->user),
+            'eventType' => get_class($event),
+            'recorded_at' => now()
+        ]);
     }
 
     public function handleAuthenticatableFailed($event) {
-        dd("Do the fail thing!");
+
+        AuthenticationLogRecord::create([
+            'eventType' => get_class($event),
+            'recorded_at' => now()
+        ]);
     }
 
     public function subscribe($events)

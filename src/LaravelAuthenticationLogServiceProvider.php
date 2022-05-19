@@ -2,11 +2,8 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog;
 
-use AuthenticatableListener;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use LangleyFoxall\LaravelAuthenticationLog\Console\ShowLog;
-use LangleyFoxall\LaravelAuthenticationLog\Listeners\AuthenticatableLoginListener;
 use LangleyFoxall\LaravelAuthenticationLog\Providers\EventServiceProvider;
 
 class LaravelAuthenticationLogServiceProvider extends ServiceProvider
