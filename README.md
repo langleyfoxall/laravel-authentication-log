@@ -30,4 +30,4 @@ This package can log the following:
 2. Failed Logins
 3. Successful Logouts
 
-Through `config/auth-log.php`, features can be added, removed and altered.
+Features can be configured through `config/auth-log.php`.
