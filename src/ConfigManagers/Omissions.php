@@ -8,10 +8,8 @@ class Omissions
     {
         $credentialsToOmit = config('auth-log.credentialsToOmit');
 
-        if ($credentialsToOmit == []) {
-            return $credentials;
-        } else {
-            return array_diff_key($credentials, array_flip($credentialsToOmit));
-        }
+        return array_filter($credentials, function($key) use($credentialsToOmit) {
+            return !in_array($key, $credentialsToOmit);
+        }, ARRAY_FILTER_USE_KEY);
     }
 }

@@ -2,12 +2,13 @@
 
 return [
     'eventsToLog' => [
+        //comment out events that should not be logged
         Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
         Illuminate\Auth\Events\Failed::class => 'handleAuthenticatableFailed',
         Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout'
     ],
-    // TODO credentialsToOmit will be read, any credentials specified here will not be stored in the log
     'credentialsToOmit' => [
         'password',
+        //add credentials here to be ommitted from being stored in the log database
     ]
 ];
