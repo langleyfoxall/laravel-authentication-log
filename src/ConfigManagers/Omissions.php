@@ -10,9 +10,7 @@ class Omissions
 
         if ($credentialsToOmit == []) {
             return $credentials;
-        }
-
-        else {
+        } else {
             return array_diff_key($credentials, array_flip($credentialsToOmit));
         }
     }
