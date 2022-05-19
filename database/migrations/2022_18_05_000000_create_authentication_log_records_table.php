@@ -10,8 +10,9 @@ class CreateAuthenticationLogRecordsTable extends Migration
     {
         Schema::create('authentication_log_records', function(Blueprint $table) {
             $table->id();
-            $table->foreignId('authenticatable_id');
-            $table->string('authenticatable_type');
+            $table->foreignId('authenticatable_id')->nullalble();
+            $table->string('authenticatable_type')->nullable();
+            $table->string('activity');
             $table->dateTime('recorded_at');
         });
     }

@@ -2,8 +2,11 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog;
 
+use AuthenticatableListener;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use LangleyFoxall\LaravelAuthenticationLog\Console\ShowLog;
+use LangleyFoxall\LaravelAuthenticationLog\Listeners\AuthenticatableLoginListener;
 use LangleyFoxall\LaravelAuthenticationLog\Providers\EventServiceProvider;
 
 class LaravelAuthenticationLogServiceProvider extends ServiceProvider
@@ -17,6 +20,8 @@ class LaravelAuthenticationLogServiceProvider extends ServiceProvider
                 ShowLog::class
             ]);
         }
+
+        $this->mergeConfigFrom(__DIR__.'/../config/auth-log.php', 'auth-log');
     }
 
     public function boot()
