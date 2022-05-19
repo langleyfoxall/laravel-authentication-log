@@ -2,6 +2,7 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog\Subscribers;
 
+use LangleyFoxall\LaravelAuthenticationLog\ConfigManagers\Omissions;
 use LangleyFoxall\LaravelAuthenticationLog\Models\AuthenticationLogRecord;
 
 class AuthenticationLogSubscriber
@@ -19,6 +20,7 @@ class AuthenticationLogSubscriber
     public function handleAuthenticatableFailed($event) {
 
         AuthenticationLogRecord::create([
+            'credentials' => Omissions::omitCredentials($event->credentials),
             'eventType' => get_class($event),
             'recorded_at' => now()
         ]);

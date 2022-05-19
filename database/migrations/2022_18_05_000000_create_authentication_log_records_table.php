@@ -12,6 +12,7 @@ class CreateAuthenticationLogRecordsTable extends Migration
             $table->id();
             $table->foreignId('authenticatable_id')->nullable();
             $table->string('authenticatable_type')->nullable();
+            $table->json('credentials')->nullable();
             $table->string('eventType');
             $table->dateTime('recorded_at');
         });
