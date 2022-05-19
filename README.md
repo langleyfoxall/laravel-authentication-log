@@ -14,12 +14,20 @@ Once the package has been installed, run your migrations and ensure to use the t
 
 All successful logins are logged within the authentication_log_records table.
 
+You may remove events to be logged through the `auth-log.php` config file by commenting out unwanted events.
+Furthermore, in the config file you may add credential items to the "credentialsToOmit" array for them to not be stored in the database.
+
 ## Commands
 
 `php artisan laravel-authentication-log:showlog`
 
 This command will display the data stored in the Authentication Log Records table
 
-## Notes
+## Features
 
-Currently only supports Logging In
+This package can log the following:
+1. Successful Logins
+2. Failed Logins
+3. Successful Logouts
+
+Features can be configured through `config/auth-log.php`.
