@@ -17,6 +17,8 @@ class LaravelAuthenticationLogServiceProvider extends ServiceProvider
                 ShowLog::class
             ]);
         }
+
+        $this->mergeConfigFrom(__DIR__.'/../config/auth-log.php', 'auth-log');
     }
 
     public function boot()

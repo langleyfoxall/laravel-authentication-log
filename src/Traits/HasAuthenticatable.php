@@ -6,8 +6,8 @@ use LangleyFoxall\LaravelAuthenticationLog\Models\AuthenticationLogRecord;
 
 trait HasAuthenticatable
 {
-    public function authenticationLogRecords()
+    public function authenticatable()
     {
-        return $this->morphMany(AuthenticationLogRecord::class, 'authenticationLogRecord');
+        return $this->morphMany(AuthenticationLogRecord::class, 'authenticatable');
     }
 }
