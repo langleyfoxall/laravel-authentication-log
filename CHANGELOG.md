@@ -1,0 +1,10 @@
+## v0.2
+
+- Can now log Failed Login Attempts and Successful Logouts to the database
+- Can select events to ignore in the Config File
+- Can select credentials to be omitted from the database in the Config File, such as passwords
+- Developers can now add authentication events easily through the `AuthenticationLogSubscriber`
+
+## v0.1
+
+- Can log successful logins to the database
