@@ -17,6 +17,7 @@ class AuthenticationLogRecordTest extends TestCase
         $attributes = [
             'authenticatable_id' => 1,
             'authenticatable_type' => "Test Type",
+            'eventType' => 'testEvent',
             'recorded_at' => $timeLog
         ];
 
