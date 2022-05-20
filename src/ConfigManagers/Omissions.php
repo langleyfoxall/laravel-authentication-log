@@ -4,6 +4,7 @@ namespace LangleyFoxall\LaravelAuthenticationLog\ConfigManagers;
 
 class Omissions
 {
+
     public static function omitCredentials($credentials)
     {
         $credentialsToOmit = config('auth-log.credentialsToOmit');

@@ -9,6 +9,8 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Contracts\Auth\Authenticatable as AuthAuthenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use LangleyFoxall\LaravelAuthenticationLog\Tests\TestCase;

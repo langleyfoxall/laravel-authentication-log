@@ -2,6 +2,7 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class AuthenticationLogRecord extends Model
