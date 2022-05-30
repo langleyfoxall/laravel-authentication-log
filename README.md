@@ -10,9 +10,9 @@ To install, enter the following inside the terminal within your working director
 
 `composer require langleyfoxall/laravel-authentication-log`
 
-Once the package has been installed, run your migrations and ensure to use the trait HasAuthenticatable in all models to be logged
+Once the package has been installed, run your migrations and ensure to use the trait HasAuthenticatable in all models to be logged.
 
-All successful logins are logged within the authentication_log_records table.
+All events are logged within the authentication_log_records table.
 
 You may remove events to be logged through the `auth-log.php` config file by commenting out unwanted events.
 Furthermore, in the config file you may add credential items to the "credentialsToOmit" array for them to not be stored in the database.
