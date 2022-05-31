@@ -7,6 +7,7 @@ use LangleyFoxall\LaravelAuthenticationLog\Models\AuthenticationLogRecord;
 
 class AuthenticationLogSubscriber
 {
+    // TODO pull from git repo to access createWithOmission method
     public function handleAuthenticatableLogin($event) 
     {
         $fields = [
