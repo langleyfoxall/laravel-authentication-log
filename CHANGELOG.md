@@ -1,3 +1,7 @@
+## v0.3
+
+- Can now log ip addresses of all machines that triggered events
+
 ## v0.2
 
 - Can now log Failed Login Attempts and Successful Logouts to the database

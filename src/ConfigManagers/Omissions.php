@@ -12,4 +12,13 @@ class Omissions
             return !in_array($key, $credentialsToOmit);
         }, ARRAY_FILTER_USE_KEY);
     }
+
+    public static function omitFields($fields)
+    {
+        $fieldsToOmit = config('auth-log.fieldsToOmit');
+
+        return array_filter($fields, function($key) use($fieldsToOmit) {
+            return !in_array($key, $fieldsToOmit);
+        }, ARRAY_FILTER_USE_KEY);
+    }
 }
