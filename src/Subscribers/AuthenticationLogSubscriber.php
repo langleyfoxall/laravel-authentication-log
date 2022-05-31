@@ -41,6 +41,17 @@ class AuthenticationLogSubscriber
         ]);
     }
 
+    public function handleAuthenticatablePasswordReset($event) 
+    {   
+        AuthenticationLogRecord::create([
+                'authenticatable_id' => $event->user->id,
+                'authenticatable_type' => get_class($event->user),
+                'eventType' => get_class($event),
+                'user_ip' => request()->getClientIp(),
+                'recorded_at' => now(),
+            ]);
+    }
+
     public function subscribe($events)
     {
         return config('auth-log.eventsToLog');
