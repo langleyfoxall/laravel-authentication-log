@@ -13,9 +13,13 @@ To install, enter the following inside the terminal within your working director
 Once the package has been installed, run your migrations and ensure to use the trait HasAuthenticatable in all models to be logged.
 
 All events are logged within the authentication_log_records table.
+## Configuration
 
-You may remove events to be logged through the `auth-log.php` config file by commenting out unwanted events.
-Furthermore, in the config file you may add credential items to the "credentialsToOmit" array for them to not be stored in the database.
+Within the `auth-log.php` config file, you may specfiy what you would like to log.
+You may change:
+- Events to log, by commenting out the unwanted events,
+- Credentials to not be logged by adding the fields within `credentialsToOmit`,
+- Fileds to not be logged by adding the fields within `fieldsToOmit`
 
 ## Commands
 
@@ -29,5 +33,8 @@ This package can log the following:
 1. Successful Logins
 2. Failed Logins
 3. Successful Logouts
+4. Password Resets
+5. Lockouts
+6. Registering New Users
 
 Features can be configured through `config/auth-log.php`.
