@@ -4,11 +4,13 @@ namespace LangleyFoxall\LaravelAuthenticationLog\Tests\Feature;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable as AuthAuthenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -74,6 +76,25 @@ class AuthenticationLogSubscriberTest extends TestCase
         $this->assertDatabaseHas('authentication_log_records', [
             'credentials' => json_encode($credentials),
             'eventType' => get_class($event)
+        ]);
+    }
+
+    public function test_a_log_record_is_created_when_a_lockout_event_is_fired()
+    {
+        $user = new User;
+        $user->name = "John I want a divorce";
+
+        $credentials = [
+            'name' => $user->name
+        ];
+
+        $request = FormRequest::create("fake uri lol", 'GET', $credentials);
+
+        $event = new Lockout($request);
+        Event::dispatch($event);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'credentials' => json_encode($credentials)
         ]);
     }
 }

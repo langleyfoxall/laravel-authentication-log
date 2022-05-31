@@ -5,7 +5,8 @@ return [
         //comment out events that should not be logged
         Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
         Illuminate\Auth\Events\Failed::class => 'handleAuthenticatableFailed',
-        Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout'
+        Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout',
+        Illuminate\Auth\Events\Lockout::class => 'handleAuthenticatableLockout',
     ],
     'credentialsToOmit' => [
         'password',
