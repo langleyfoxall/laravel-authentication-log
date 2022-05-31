@@ -47,7 +47,7 @@ class AuthenticationLogSubscriber
             'credentials' => Omissions::omitCredentials($event->request->query()),
             'eventType' => get_class($event),
             'user_ip' =>  $event->request->getClientIp,
-            'recorded_at' => now()
+            'recorded_at' => now(),
         ]);
     }
 
