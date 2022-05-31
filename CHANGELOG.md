@@ -1,6 +1,8 @@
 ## v0.3
 
 - Can now log ip addresses of all machines that triggered events
+- Fixed field omissions not working correctly
+- Added `createWithOmissions` method to `AuthenticationLogRecord`
 
 ## v0.2
 
