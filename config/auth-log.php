@@ -6,7 +6,9 @@ return [
         Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
         Illuminate\Auth\Events\Failed::class => 'handleAuthenticatableFailed',
         Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout',
-        Illuminate\Auth\Events\Registered::class => 'handleAuthenticatableRegistered'
+        Illuminate\Auth\Events\Registered::class => 'handleAuthenticatableRegistered',
+        Illuminate\Auth\Events\Lockout::class => 'handleAuthenticatableLockout',
+        Illuminate\Auth\Events\PasswordReset::class => 'handleAuthenticatablePasswordReset',
     ],
     'credentialsToOmit' => [
         'password',
