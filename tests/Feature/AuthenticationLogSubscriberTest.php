@@ -87,7 +87,7 @@ class AuthenticationLogSubscriberTest extends TestCase
         $this->assertDatabaseHas('authentication_log_records', [
             'authenticatable_id' => $user->id,
             'authenticatable_type' => get_class($user),
-            'eventType' => get_class($event)
+            'eventType' => get_class($event),
         ]);
     }
 }
