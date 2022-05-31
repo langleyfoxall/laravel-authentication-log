@@ -12,6 +12,7 @@ return [
         //add credentials here to be ommitted from being stored in the log database
     ],
     'fieldsToOmit' => [
-        'user_ip'
+        'user_ip',
+        //add fields here to be omitted from being stored in the log database
     ]
 ];

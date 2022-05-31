@@ -23,7 +23,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
             'thingToOmit' => "12345678",
         ];
 
-        app('config')["auth-log.credentialsToOmit.0"] = '';
+        app('config')["auth-log.credentialsToOmit"] = [];
 
         $event = new Failed('web', null, $credentials);
         Event::dispatch($event);
@@ -32,7 +32,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         AuthenticationLogRecord::first()->delete();
 
-        app('config')["auth-log.credentialsToOmit.0"] = 'thingToOmit';
+        app('config')["auth-log.credentialsToOmit"] = ['thingToOmit'];
 
         $event = new Failed('web', null, $credentials);
         Event::dispatch($event);
@@ -44,8 +44,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
     {
         $user = new User;
 
-        //TODO should add "auth-log.fieldsToOmit" = '' for when fieldsToOmit isn't the first entry
-        app('config')["auth-log.fieldsToOmit.0"] = '';
+        app('config')["auth-log.fieldsToOmit"] = [];
 
         $event = new Login('web', $user, false);
         Event::dispatch($event);
@@ -54,7 +53,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         AuthenticationLogRecord::first()->delete();
 
-        app('config')["auth-log.fieldsToOmit.0"] = 'user_ip';
+        app('config')["auth-log.fieldsToOmit"] = ['user_ip'];
 
         $event = new Login('web', $user, false);
         Event::dispatch($event);
