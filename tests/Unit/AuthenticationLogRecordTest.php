@@ -27,7 +27,7 @@ class AuthenticationLogRecordTest extends TestCase
 
     public function test_creating_a_record_stores_the_ip_address_in_the_database()
     {
-        $testIP = '314.159.26.54';
+        $testIP = '88.123.66.99';
 
         $attributes = [
             'eventType' => 'testEvent',
