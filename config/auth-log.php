@@ -17,5 +17,8 @@ return [
     'fieldsToOmit' => [
         'user_ip',
         //add fields here to be omitted from being stored in the log database
-    ]
+    ],
+    'acceptedGuards' => [
+        'api',
+    ],
 ];

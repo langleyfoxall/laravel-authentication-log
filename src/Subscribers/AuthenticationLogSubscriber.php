@@ -14,6 +14,7 @@ class AuthenticationLogSubscriber
             'authenticatable_type' => get_class($event->user),
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard,
             'recorded_at' => now()
         ];
         
@@ -26,6 +27,7 @@ class AuthenticationLogSubscriber
             'credentials' => Omissions::omitCredentials($event->credentials),
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard,
             'recorded_at' => now()
         ]);
     }
@@ -37,6 +39,7 @@ class AuthenticationLogSubscriber
             'authenticatable_type' => get_class($event->user),
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard,
             'recorded_at' => now()
         ]);
     }
@@ -51,6 +54,7 @@ class AuthenticationLogSubscriber
             'recorded_at' => now(),
         ]);
     }
+
     public function handleAuthenticatableLockout($event)
     {
         AuthenticationLogRecord::create([

@@ -71,7 +71,6 @@ class AuthenticationLogSubscriberTest extends TestCase
         ];
 
         $event = new Failed('web', null, $credentials);
-
         Event::dispatch($event);
 
         $this->assertDatabaseHas('authentication_log_records', [
