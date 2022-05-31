@@ -76,4 +76,18 @@ class AuthenticationLogSubscriberTest extends TestCase
             'eventType' => get_class($event)
         ]);
     }
+
+    public function test_a_log_record_is_created_when_a_registered_event_is_fired()
+    {
+        $user = new User;
+        $event = new Registered($user);
+
+        Event::dispatch($event);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authenticatable_type' => get_class($user),
+            'eventType' => get_class($event)
+        ]);
+    }
 }
