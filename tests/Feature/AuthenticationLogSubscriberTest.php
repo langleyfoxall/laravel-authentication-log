@@ -37,7 +37,7 @@ class AuthenticationLogSubscriberTest extends TestCase
         $user = new User;
         $user->id = 1;
 
-        $event = new Login('web', $user, false);
+        $event = new Login(null, $user, false);
 
         Event::dispatch($event);
 
@@ -53,7 +53,7 @@ class AuthenticationLogSubscriberTest extends TestCase
         $user = new User;
         $user->id = 1;
 
-        $event = new Logout('web', $user);
+        $event = new Logout(null, $user);
 
         Event::dispatch($event);
 
@@ -70,8 +70,7 @@ class AuthenticationLogSubscriberTest extends TestCase
             'name' => 'notJohn',
         ];
 
-        $event = new Failed('web', null, $credentials);
-
+        $event = new Failed(null, null, $credentials);
         Event::dispatch($event);
 
         $this->assertDatabaseHas('authentication_log_records', [

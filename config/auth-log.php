@@ -15,7 +15,12 @@ return [
         //add credentials here to be ommitted from being stored in the log database
     ],
     'fieldsToOmit' => [
-        'user_ip',
-        //add fields here to be omitted from being stored in the log database
-    ]
+        //add fields here to be omitted from being stored in the log database, eg:
+        // 'user_ip',
+    ],
+    'acceptedGuards' => [
+        'web',
+        'api',
+        //add guards here to specify only which guards should be accepted
+    ],
 ];
