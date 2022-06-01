@@ -18,8 +18,9 @@ All events are logged within the authentication_log_records table.
 Within the `auth-log.php` config file, you may specfiy what you would like to log.
 You may change:
 - Events to log, by commenting out the unwanted events,
-- Credentials to not be logged by adding the fields within `credentialsToOmit`,
-- Fileds to not be logged by adding the fields within `fieldsToOmit`
+- Credentials to not be logged, by adding the fields within `credentialsToOmit`,
+- Fields to not be logged, by adding the fields within `fieldsToOmit`,
+- Accepted Guards, by adding the specified guards within `acceptedGuards`
 
 ## Commands
 
@@ -30,11 +31,11 @@ This command will display the data stored in the Authentication Log Records tabl
 ## Features
 
 This package can log the following:
-1. Successful Logins
-2. Failed Logins
-3. Successful Logouts
-4. Password Resets
-5. Lockouts
-6. Registering New Users
+- Successful Logins
+- Failed Logins
+- Successful Logouts
+- Password Resets
+- Lockouts
+- Registering New Users
 
 Features can be configured through `config/auth-log.php`.

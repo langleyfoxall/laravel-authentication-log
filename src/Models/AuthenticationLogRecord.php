@@ -3,7 +3,7 @@
 namespace LangleyFoxall\LaravelAuthenticationLog\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LangleyFoxall\LaravelAuthenticationLog\ConfigManagers\Omissions;
+use LangleyFoxall\LaravelAuthenticationLog\Configurations\ConfigManager;
 
 class AuthenticationLogRecord extends Model
 {
@@ -20,11 +20,28 @@ class AuthenticationLogRecord extends Model
         return $this->morphTo();
     }
 
-    public static function createWithOmissions(array $data)
+    private static function guardIsAccepted(array $data)
     {
-        if(array_key_exists('credentials', $data)) {
-            $data['credentials'] = Omissions::omitCredentials($data['credentials']);
+        if(!array_key_exists('guard', $data)) {
+            return true;
         }
-        self::create(Omissions::omitFields($data));
+
+        else if(ConfigManager::guardAccepted($data['guard'])) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    public static function createWithConfigFilters(array $data)
+    {
+        if(self::guardIsAccepted($data)) {
+
+            if(array_key_exists('credentials', $data)) {
+                $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
+            }
+
+            self::create(ConfigManager::omitFields($data));
+        }
     }
 }
