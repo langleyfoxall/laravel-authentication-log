@@ -9,65 +9,55 @@ class AuthenticationLogSubscriber
 {
     public function handleAuthenticatableLogin($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
-            'authenticatable_id' => $event->user->id,
-            'authenticatable_type' => get_class($event->user),
-            'eventType' => get_class($event),
-            'user_ip' => request()->getClientIp(),
-            'recorded_at' => now()
-        ]);
+        self::createAuthenticationLogRecord($event);
     }
 
     public function handleAuthenticatableFailed($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
-            'credentials' => Omissions::omitCredentials($event->credentials),
-            'eventType' => get_class($event),
-            'user_ip' => request()->getClientIp(),
-            'recorded_at' => now()
+        self::createAuthenticationLogRecord($event, [
+            'credentials' => $event->credentials
         ]);
     }
 
     public function handleAuthenticatableLogout($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
-            'authenticatable_id' => $event->user->id,
-            'authenticatable_type' => get_class($event->user),
-            'eventType' => get_class($event),
-            'user_ip' => request()->getClientIp(),
-            'recorded_at' => now()
-        ]);
+        self::createAuthenticationLogRecord($event);
     }
 
     public function handleAuthenticatableRegistered($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
-            'authenticatable_id' => $event->user->id,
-            'authenticatable_type' => get_class($event->user),
-            'eventType' => get_class($event),
-            'user_ip' => request()->getClientIp(),
-            'recorded_at' => now(),
-        ]);
+        self::createAuthenticationLogRecord($event);
     }
+
     public function handleAuthenticatableLockout($event)
     {
-        AuthenticationLogRecord::createWithOmissions([
+        self::createAuthenticationLogRecord($event, [
             'credentials' => $event->request->query(),
-            'eventType' => get_class($event),
-            'user_ip' =>  $event->request->getClientIp,
-            'recorded_at' => now(),
+            'user_ip' =>  $event->request->getClientIp()
         ]);
     }
     
     public function handleAuthenticatablePasswordReset($event) 
     {   
-        AuthenticationLogRecord::createWithOmissions([
+        self::createAuthenticationLogRecord($event);
+    }
+
+    private function createAuthenticationLogRecord($event, $data = [])
+    {
+        $defaultParameters = [
+            'eventType' => get_class($event),
+            'user_ip' => request()->getClientIp(),
+            'recorded_at' => now(),
+        ];
+
+        if(isset($event->user)) {
+            $defaultParameters = array_merge($defaultParameters, [
                 'authenticatable_id' => $event->user->id,
                 'authenticatable_type' => get_class($event->user),
-                'eventType' => get_class($event),
-                'user_ip' => request()->getClientIp(),
-                'recorded_at' => now(),
             ]);
+        }
+
+        AuthenticationLogRecord::createWithOmissions(array_merge($defaultParameters, $data));
     }
 
     public function subscribe($events)
