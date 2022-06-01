@@ -2,7 +2,8 @@
 
 - Can now log ip addresses of all machines that triggered events
 - Can select fields to be omitted, for example, `user_ip`
-- Can not log User Registered events, Lockout events and Password Reset events
+- Can now log User Registered events, Lockout events and Password Reset events
+- Can now specify credentials to be encrypted before being stored in the database
 - Fixed field omissions not working correctly
 - Added `createWithOmissions` method to `AuthenticationLogRecord`
 

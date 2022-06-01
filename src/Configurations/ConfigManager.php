@@ -35,25 +35,11 @@ class ConfigManager
     {
         $credentialsToEncrypt = config('auth-log.credentialsToEncrypt');
 
-        //for each of the elements in credentials
-        //if credential key is equals to any of the credentialsToEncrypt values
-        //encrypt them
-        //return array of keys and encrypted values
-
-        foreach ($credentials as $credential) {
-            if(in_array($credential, $credentialsToEncrypt)) {
-                $credential = Crypt::encrypt($credential);
+        array_walk($credentials, function(&$value, $key) use($credentialsToEncrypt) {
+            if(in_array($key, $credentialsToEncrypt)) {
+                $value = Crypt::encryptString($value);
             }
-        }
-
-        array_map(function($credential) use ($credentialsToEncrypt){
-
-            if(in_array(array_keys($credential), $credentialsToEncrypt)) {
-                    $credential = Crypt::encrypt($credential);
-            }
-
-            return $credential;
-
-        }, $credentials);
+        });
+        return $credentials;
     }
 }
