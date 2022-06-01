@@ -98,4 +98,31 @@ class AuthenticationLogRecordGuardsTest extends TestCase
             'guard' => $acceptedGuard,
         ]);
     }
+
+    public function test_specifying_no_guards_within_config_file_allows_all_guards_to_be_logged()
+    {
+        $user = new User;
+        $guard1 = "Guard One";
+        $guard2 = "Guard Two";
+
+        app('config')["auth-log.acceptedGuards"] = [];
+
+        $event = new Login($guard1, $user, false);
+        Event::dispatch($event);
+
+        $event = new Login($guard2, $user, false);
+        Event::dispatch($event);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authentictable_type' => get_class($user),
+            'guard' => $guard1 
+        ]);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authentictable_type' => get_class($user),
+            'guard' => $guard2
+        ]);
+    }
 }
