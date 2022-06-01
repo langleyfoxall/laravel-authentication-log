@@ -1,8 +1,10 @@
 <?php
 
-namespace LangleyFoxall\LaravelAuthenticationLog\ConfigManagers;
+namespace LangleyFoxall\LaravelAuthenticationLog\Configurations;
 
-class Omissions
+use function PHPUnit\Framework\arrayHasKey;
+
+class ConfigManager
 {
     public static function omitCredentials($credentials)
     {
@@ -20,5 +22,10 @@ class Omissions
         return array_filter($fields, function($key) use($fieldsToOmit) {
             return !in_array($key, $fieldsToOmit);
         }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public static function guardAccepted($guard)
+    {
+        return $guard == null || in_array($guard, config('auth-log.acceptedGuards'));
     }
 }

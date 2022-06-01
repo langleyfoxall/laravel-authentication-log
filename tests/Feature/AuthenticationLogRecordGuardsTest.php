@@ -73,11 +73,10 @@ class AuthenticationLogRecordGuardsTest extends TestCase
 
     public function test_only_events_with_a_guard_specified_in_the_config_file_is_logged()
     {
-        // TODO in the subscriber, make it so only accepted guards are recorded, maybe through the createWithOmissions method
         $user = new User;
         $acceptedGuard = 'Stop you violated the law';
 
-        app('config')["auth-log.acceptedGuard"] = [];
+        app('config')["auth-log.acceptedGuards"] = [];
 
         $event = new Login($acceptedGuard, $user, false);
         Event::dispatch($event);
@@ -88,7 +87,7 @@ class AuthenticationLogRecordGuardsTest extends TestCase
             'guard' => $acceptedGuard,
         ]);
 
-        app('config')["auth-log.acceptedGuard"] = [$acceptedGuard];
+        app('config')["auth-log.acceptedGuards"] = [$acceptedGuard];
 
         $event = new Login($acceptedGuard, $user, false);
         Event::dispatch($event);
