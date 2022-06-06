@@ -40,6 +40,7 @@ class ConfigManager
                 $value = Crypt::encryptString($value);
             }
         });
+        
         return $credentials;
     }
 }
