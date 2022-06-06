@@ -3,27 +3,28 @@
 return [
     'eventsToLog' => [
         //comment out events that should not be logged
-        Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
-        Illuminate\Auth\Events\Failed::class => 'handleAuthenticatableFailed',
-        Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout',
-        Illuminate\Auth\Events\Registered::class => 'handleAuthenticatableRegistered',
-        Illuminate\Auth\Events\Lockout::class => 'handleAuthenticatableLockout',
-        Illuminate\Auth\Events\PasswordReset::class => 'handleAuthenticatablePasswordReset',
+        \Illuminate\Auth\Events\Login::class,
+        \Illuminate\Auth\Events\Failed::class,
+        \Illuminate\Auth\Events\Logout::class,
+        \Illuminate\Auth\Events\Registered::class,
+        \Illuminate\Auth\Events\Lockout::class,
+        \Illuminate\Auth\Events\PasswordReset::class,
     ],
     'credentialsToOmit' => [
-        'password',
         //add credentials here to be ommitted from being stored in the log database
+        'password',
     ],
     'credentialsToEncrypt' => [
+        //add credentials here to be encrypted in the log database, for example
         // 'password'
     ],
     'fieldsToOmit' => [
-        //add fields here to be omitted from being stored in the log database, eg:
+        //add fields here to be omitted from being stored in the log database, for example
         // 'user_ip',
     ],
     'acceptedGuards' => [
+        //add guards here to specify which guards only should be accepted
         'web',
         'api',
-        //add guards here to specify only which guards should be accepted
     ],
 ];

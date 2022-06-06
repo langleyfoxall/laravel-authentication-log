@@ -20,6 +20,19 @@ class AuthenticationLogRecord extends Model
         return $this->morphTo();
     }
 
+    private static function guardIsAccepted(array $data)
+    {
+        if(!array_key_exists('guard', $data)) {
+            return true;
+        }
+
+        else if(ConfigManager::guardAccepted($data['guard'])) {
+            return true;
+        }
+        
+        return false;
+    }
+
     public static function createWithConfigFilters(array $data)
     {
         if(array_key_exists('credentials', $data)) {
