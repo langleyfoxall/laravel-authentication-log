@@ -22,25 +22,10 @@ class AuthenticationLogRecord extends Model
 
     public static function createWithConfigFilters(array $data)
     {
-        // TODO should find a nicer way to write the to avoid copy and pasting
-        if(!array_key_exists('guard', $data)) {
-
-            if(array_key_exists('credentials', $data)) {
-                $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
-            }
-            self::create(ConfigManager::omitFields($data));
-
+        if(array_key_exists('credentials', $data)) {
+            $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
+            $data['credentials'] = ConfigManager::encryptCredentials($data['credentials']);
         }
-
-        else
-        {
-            if(ConfigManager::guardAccepted($data['guard'])) {
-
-                if(array_key_exists('credentials', $data)) {
-                    $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
-                }
-                self::create(ConfigManager::omitFields($data));
-            }
-        }
+        self::create(ConfigManager::omitFields($data));
     }
 }
