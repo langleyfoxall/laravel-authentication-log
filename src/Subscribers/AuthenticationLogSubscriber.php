@@ -7,41 +7,45 @@ use LangleyFoxall\LaravelAuthenticationLog\Models\AuthenticationLogRecord;
 
 class AuthenticationLogSubscriber
 {
+    // TODO pulled from master, watch out for merge conflict errors
     public function handleAuthenticatableLogin($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
+        AuthenticationLogRecord::createWithConfigFilters([
             'authenticatable_id' => $event->user->id,
             'authenticatable_type' => get_class($event->user),
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard, 
             'recorded_at' => now()
         ]);
     }
 
     public function handleAuthenticatableFailed($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
-            'credentials' => Omissions::omitCredentials($event->credentials),
+        AuthenticationLogRecord::createWithConfigFilters([
+            'credentials' => $event->credentials,
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard,
             'recorded_at' => now()
         ]);
     }
 
     public function handleAuthenticatableLogout($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
+        AuthenticationLogRecord::createWithConfigFilters([
             'authenticatable_id' => $event->user->id,
             'authenticatable_type' => get_class($event->user),
             'eventType' => get_class($event),
             'user_ip' => request()->getClientIp(),
+            'guard' => $event->guard,
             'recorded_at' => now()
         ]);
     }
 
     public function handleAuthenticatableRegistered($event) 
     {
-        AuthenticationLogRecord::createWithOmissions([
+        AuthenticationLogRecord::createWithConfigFilters([
             'authenticatable_id' => $event->user->id,
             'authenticatable_type' => get_class($event->user),
             'eventType' => get_class($event),
@@ -49,19 +53,20 @@ class AuthenticationLogSubscriber
             'recorded_at' => now(),
         ]);
     }
+
     public function handleAuthenticatableLockout($event)
     {
-        AuthenticationLogRecord::createWithOmissions([
+        AuthenticationLogRecord::createWithConfigFilters([
             'credentials' => $event->request->query(),
             'eventType' => get_class($event),
-            'user_ip' =>  $event->request->getClientIp,
+            'user_ip' =>  $event->request->getClientIp(),
             'recorded_at' => now(),
         ]);
     }
     
     public function handleAuthenticatablePasswordReset($event) 
     {   
-        AuthenticationLogRecord::createWithOmissions([
+        AuthenticationLogRecord::createWithConfigFilters([
                 'authenticatable_id' => $event->user->id,
                 'authenticatable_type' => get_class($event->user),
                 'eventType' => get_class($event),

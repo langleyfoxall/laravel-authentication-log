@@ -20,7 +20,7 @@ class AuthenticationLogRecord extends Model
         return $this->morphTo();
     }
 
-    public static function createWithOmissions(array $data)
+    public static function createWithConfigFilters(array $data)
     {
         if(array_key_exists('credentials', $data)) {
             $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);

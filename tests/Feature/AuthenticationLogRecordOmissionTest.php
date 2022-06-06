@@ -25,7 +25,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         app('config')["auth-log.credentialsToOmit"] = [];
 
-        $event = new Failed('web', null, $credentials);
+        $event = new Failed(null, null, $credentials);
         Event::dispatch($event);
 
         $this->assertEquals(AuthenticationLogRecord::first()->credentials, $credentials);
@@ -34,7 +34,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         app('config')["auth-log.credentialsToOmit"] = ['thingToOmit'];
 
-        $event = new Failed('web', null, $credentials);
+        $event = new Failed(null, null, $credentials);
         Event::dispatch($event);
 
         $this->assertEquals(AuthenticationLogRecord::first()->credentials, ['name' => $testName]);
@@ -46,7 +46,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         app('config')["auth-log.fieldsToOmit"] = [];
 
-        $event = new Login('web', $user, false);
+        $event = new Login(null, $user, false);
         Event::dispatch($event);
 
         $this->assertNotNull(AuthenticationLogRecord::first()->user_ip);
@@ -55,7 +55,7 @@ class AuthenticationLogRecordOmissionTest extends TestCase
 
         app('config')["auth-log.fieldsToOmit"] = ['user_ip'];
 
-        $event = new Login('web', $user, false);
+        $event = new Login(null, $user, false);
         Event::dispatch($event);
 
         $this->assertNull(AuthenticationLogRecord::first()->user_ip);

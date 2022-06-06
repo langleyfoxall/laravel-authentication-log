@@ -4,8 +4,9 @@
 - Can select fields to be omitted, for example, `user_ip`
 - Can now log User Registered events, Lockout events and Password Reset events
 - Can now specify credentials to be encrypted before being stored in the database
+- Can now specify accepted guards within config file
 - Fixed field omissions not working correctly
-- Added `createWithOmissions` method to `AuthenticationLogRecord`
+- Added `createWithConfigFilters` method to `AuthenticationLogRecord`
 
 ## v0.2
 
