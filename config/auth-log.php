@@ -14,9 +14,13 @@ return [
         //add credentials here to be ommitted from being stored in the log database
         'password',
     ],
+    'credentialsToEncrypt' => [
+        //add credentials here to be encrypted in the log database, for example
+        // 'password'
+    ],
     'fieldsToOmit' => [
-        //add fields here to be omitted from being stored in the log database
-        'user_ip',
+        //add fields here to be omitted from being stored in the log database, for example
+        // 'user_ip',
     ],
     'acceptedGuards' => [
         //add guards here to specify which guards only should be accepted
