@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User implements Authenticatable
 {
-    public $id;
+    public $id = 1;
 
     // no-op -- method definitions given to comply with Authenticatable Interface,
     //          purely for testing purposes only

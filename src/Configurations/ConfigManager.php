@@ -2,6 +2,8 @@
 
 namespace LangleyFoxall\LaravelAuthenticationLog\Configurations;
 
+use Illuminate\Support\Facades\Crypt;
+
 use function PHPUnit\Framework\arrayHasKey;
 
 class ConfigManager
@@ -27,5 +29,18 @@ class ConfigManager
     public static function guardAccepted($guard)
     {
         return $guard == null || in_array($guard, config('auth-log.acceptedGuards'));
+    }
+
+    public static function encryptCredentials($credentials)
+    {
+        $credentialsToEncrypt = config('auth-log.credentialsToEncrypt');
+
+        array_walk($credentials, function(&$value, $key) use($credentialsToEncrypt) {
+            if(in_array($key, $credentialsToEncrypt)) {
+                $value = Crypt::encryptString($value);
+            }
+        });
+        
+        return $credentials;
     }
 }

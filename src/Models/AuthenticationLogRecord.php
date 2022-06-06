@@ -20,27 +20,27 @@ class AuthenticationLogRecord extends Model
         return $this->morphTo();
     }
 
+    private static function guardIsAccepted(array $data)
+    {
+        if(!array_key_exists('guard', $data)) {
+            return true;
+        } elseif(ConfigManager::guardAccepted($data['guard'])) {
+            return true;
+        }
+        
+        return false;
+    }
+
     public static function createWithConfigFilters(array $data)
     {
-        // TODO should find a nicer way to write the to avoid copy and pasting
-        if(!array_key_exists('guard', $data)) {
+        if(self::guardIsAccepted($data)) {
 
             if(array_key_exists('credentials', $data)) {
                 $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
+                $data['credentials'] = ConfigManager::encryptCredentials($data['credentials']);
             }
+
             self::create(ConfigManager::omitFields($data));
-
-        }
-
-        else
-        {
-            if(ConfigManager::guardAccepted($data['guard'])) {
-
-                if(array_key_exists('credentials', $data)) {
-                    $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
-                }
-                self::create(ConfigManager::omitFields($data));
-            }
         }
     }
 }
