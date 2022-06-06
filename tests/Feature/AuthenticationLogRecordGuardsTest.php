@@ -75,27 +75,53 @@ class AuthenticationLogRecordGuardsTest extends TestCase
     {
         $user = new User;
         $acceptedGuard = 'Stop you violated the law';
-
-        app('config')["auth-log.acceptedGuards"] = [];
-
-        $event = new Login($acceptedGuard, $user, false);
-        Event::dispatch($event);
-
-        $this->assertDatabaseMissing('authentication_log_records', [
-            'authenticatable_id' => $user->id,
-            'authenticatable_type' => get_class($user),
-            'guard' => $acceptedGuard,
-        ]);
+        $deniedGuard = 'Pay the court a fine or serve your sentence';
 
         app('config')["auth-log.acceptedGuards"] = [$acceptedGuard];
 
         $event = new Login($acceptedGuard, $user, false);
         Event::dispatch($event);
 
+        $event = new Login($deniedGuard, $user, false);
+        Event::dispatch($event);
+
         $this->assertDatabaseHas('authentication_log_records', [
             'authenticatable_id' => $user->id,
             'authenticatable_type' => get_class($user),
             'guard' => $acceptedGuard,
+        ]);
+
+        $this->assertDatabaseMissing('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authenticatable_type' => get_class($user),
+            'guard' => $deniedGuard,
+        ]);
+    }
+
+    public function test_specifying_no_guards_within_config_file_allows_all_guards_to_be_logged()
+    {
+        $user = new User;
+        $guard1 = "Guard One";
+        $guard2 = "Guard Two";
+
+        app('config')["auth-log.acceptedGuards"] = [];
+
+        $event = new Login($guard1, $user, false);
+        Event::dispatch($event);
+
+        $event = new Login($guard2, $user, false);
+        Event::dispatch($event);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authenticatable_type' => get_class($user),
+            'guard' => $guard1 
+        ]);
+
+        $this->assertDatabaseHas('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authenticatable_type' => get_class($user),
+            'guard' => $guard2
         ]);
     }
 }

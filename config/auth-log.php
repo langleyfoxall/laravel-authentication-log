@@ -26,5 +26,6 @@ return [
         //add guards here to specify which guards only should be accepted, for example,
         // 'web',
         // 'api',
+        // if no guards are specifed, then all guards will be accepted
     ],
 ];
