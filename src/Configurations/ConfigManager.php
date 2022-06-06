@@ -28,7 +28,8 @@ class ConfigManager
 
     public static function guardAccepted($guard)
     {
-        return $guard == null || in_array($guard, config('auth-log.acceptedGuards'));
+        return $guard == null || in_array($guard, config('auth-log.acceptedGuards'))
+            || config('auth-log.acceptedGuards') == [];
     }
 
     public static function encryptCredentials($credentials)

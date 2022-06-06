@@ -75,27 +75,26 @@ class AuthenticationLogRecordGuardsTest extends TestCase
     {
         $user = new User;
         $acceptedGuard = 'Stop you violated the law';
-
-        app('config')["auth-log.acceptedGuards"] = [];
-
-        $event = new Login($acceptedGuard, $user, false);
-        Event::dispatch($event);
-
-        $this->assertDatabaseMissing('authentication_log_records', [
-            'authenticatable_id' => $user->id,
-            'authenticatable_type' => get_class($user),
-            'guard' => $acceptedGuard,
-        ]);
+        $deniedGuard = 'Pay the court a fine or serve your sentence';
 
         app('config')["auth-log.acceptedGuards"] = [$acceptedGuard];
 
         $event = new Login($acceptedGuard, $user, false);
         Event::dispatch($event);
 
+        $event = new Login($deniedGuard, $user, false);
+        Event::dispatch($event);
+
         $this->assertDatabaseHas('authentication_log_records', [
             'authenticatable_id' => $user->id,
             'authenticatable_type' => get_class($user),
             'guard' => $acceptedGuard,
+        ]);
+
+        $this->assertDatabaseMissing('authentication_log_records', [
+            'authenticatable_id' => $user->id,
+            'authenticatable_type' => get_class($user),
+            'guard' => $deniedGuard,
         ]);
     }
 
@@ -115,13 +114,13 @@ class AuthenticationLogRecordGuardsTest extends TestCase
 
         $this->assertDatabaseHas('authentication_log_records', [
             'authenticatable_id' => $user->id,
-            'authentictable_type' => get_class($user),
+            'authenticatable_type' => get_class($user),
             'guard' => $guard1 
         ]);
 
         $this->assertDatabaseHas('authentication_log_records', [
             'authenticatable_id' => $user->id,
-            'authentictable_type' => get_class($user),
+            'authenticatable_type' => get_class($user),
             'guard' => $guard2
         ]);
     }
