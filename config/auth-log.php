@@ -11,7 +11,7 @@ return [
         Illuminate\Auth\Events\PasswordReset::class => 'handleAuthenticatablePasswordReset',
     ],
     'credentialsToOmit' => [
-        // 'password',
+        'password',
         //add credentials here to be ommitted from being stored in the log database
     ],
     'credentialsToEncrypt' => [
