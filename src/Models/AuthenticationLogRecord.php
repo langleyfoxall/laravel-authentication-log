@@ -24,9 +24,7 @@ class AuthenticationLogRecord extends Model
     {
         if(!array_key_exists('guard', $data)) {
             return true;
-        }
-
-        else if(ConfigManager::guardAccepted($data['guard'])) {
+        } elseif(ConfigManager::guardAccepted($data['guard'])) {
             return true;
         }
         
@@ -35,10 +33,14 @@ class AuthenticationLogRecord extends Model
 
     public static function createWithConfigFilters(array $data)
     {
-        if(array_key_exists('credentials', $data)) {
-            $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
-            $data['credentials'] = ConfigManager::encryptCredentials($data['credentials']);
+        if(self::guardIsAccepted($data)) {
+
+            if(array_key_exists('credentials', $data)) {
+                $data['credentials'] = ConfigManager::omitCredentials($data['credentials']);
+                $data['credentials'] = ConfigManager::encryptCredentials($data['credentials']);
+            }
+
+            self::create(ConfigManager::omitFields($data));
         }
-        self::create(ConfigManager::omitFields($data));
     }
 }

@@ -69,12 +69,12 @@ class AuthenticationLogSubscriber
     public function subscribe($events)
     {
         $loggableEvents = [
-            \Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
             \Illuminate\Auth\Events\Failed::class => 'handleAuthenticatableFailed',
-            \Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout',
-            \Illuminate\Auth\Events\Registered::class => 'handleAuthenticatableRegistered',
             \Illuminate\Auth\Events\Lockout::class => 'handleAuthenticatableLockout',
+            \Illuminate\Auth\Events\Login::class => 'handleAuthenticatableLogin',
+            \Illuminate\Auth\Events\Logout::class => 'handleAuthenticatableLogout',
             \Illuminate\Auth\Events\PasswordReset::class => 'handleAuthenticatablePasswordReset',
+            \Illuminate\Auth\Events\Registered::class => 'handleAuthenticatableRegistered',
         ];
 
         return array_filter($loggableEvents, function($key) {
